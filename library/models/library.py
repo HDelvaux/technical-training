@@ -1,6 +1,6 @@
 from odoo import api, models, fields
 
-class Book(models.Model)
+class Book(models.Model):
 
     _name = 'library.book'
     
@@ -11,21 +11,21 @@ class Book(models.Model)
     ISBN = fields.Integer()
 
 
-class Author(models.Model)
+class Author(models.Model):
 
     _name = 'library.author'
 
     name = fields.Char()
     books = fields.Many2many('library.book')
     
-class Editor(models.Model)
+class Editor(models.Model):
 
     _name = 'library.editor'
 
     name = fields.Char()
     books = fields.Many2many('library.book')
     
-class Customer(models.Model)
+class Customer(models.Model):
 
     _name = 'library.customer'
 
