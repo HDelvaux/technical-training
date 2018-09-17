@@ -1,6 +1,6 @@
-from odoo import fields, models
+from odoo import api, fields, models
 
-class Course(models.Model)
+class Course(models.Model):
 
     _name = 'openacademy.course'
 
@@ -8,7 +8,7 @@ class Course(models.Model)
     level = fields.Integer()
     sessions = fields.Many2one('openacademy.session')
 
-class Session(models.Model)
+class Session(models.Model):
 
     _name = 'openacademy.session'
     
@@ -18,13 +18,13 @@ class Session(models.Model)
     active = fields.Boolean()
     archive = fields.Boolean()
     
-class Attendee(models.Model)
+class Attendee(models.Model):
 
     _name = 'openacademy.attendee'
     
     name = fields.Char()
     
-class Maester(models.Model)
+class Maester(models.Model):
 
     _name = 'openacademy.'
     
