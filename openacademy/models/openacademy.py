@@ -26,6 +26,6 @@ class Attendee(models.Model):
     
 class Maester(models.Model):
 
-    _name = 'openacademy.'
+    _name = 'openacademy.maester'
     
     name = fields.Char()
