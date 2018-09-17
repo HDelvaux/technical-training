@@ -5,7 +5,7 @@ class Book(models.Model):
     _name = 'library.book'
     
     authors = fields.Many2many('library.author')
-    editors = fields.Many2many('library.editors')
+    editors = fields.Many2many('library.editor')
     customers = fields.Many2many('library.customer')
     edition_year = fields.Integer()
     ISBN = fields.Integer()
