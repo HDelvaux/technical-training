@@ -6,15 +6,16 @@ class Course(models.Model):
 
     label = fields.Char()
     level = fields.Integer()
-    sessions = fields.Many2one('openacademy.session')
+    sessions = fields.One2Many('openacademy.session')
 
 class Session(models.Model):
 
     _name = 'openacademy.session'
     
     date = fields.Date()
-    maester = fields.One2many('openacademy.maester')
+    maester = fields.Many2one('openacademy.maester')
     attendees = fields.Many2many('openacademy.attendee')
+    course = fields.Many2one('openacademy.course')
     active = fields.Boolean()
     archive = fields.Boolean()
     
@@ -23,9 +24,11 @@ class Attendee(models.Model):
     _name = 'openacademy.attendee'
     
     name = fields.Char()
+    sessions = fields.One2many('openacademy.session')
     
 class Maester(models.Model):
 
     _name = 'openacademy.maester'
     
     name = fields.Char()
+    sessions = fields.One2many('openacademy.session')
