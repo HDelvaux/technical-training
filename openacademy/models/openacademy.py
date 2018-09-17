@@ -13,8 +13,8 @@ class Session(models.Model)
     _name = 'openacademy.session'
     
     date = fields.Date()
-    maester = fields.One2many('')
-    attendees = fields.Many2many('')
+    maester = fields.One2many('openacademy.maester')
+    attendees = fields.Many2many('openacademy.attendee')
     active = fields.Boolean()
     archive = fields.Boolean()
     

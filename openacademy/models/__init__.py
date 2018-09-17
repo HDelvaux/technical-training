@@ -1,3 +1,3 @@
 # -*- coding: utf-8 -*-
 
-import openacademy.py
+import openacademy
