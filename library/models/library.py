@@ -32,4 +32,4 @@ class Customer(models.Model):
     name = fields.Char()
     address = fields.Char()
     emails = fields.Char()
-    books  = fileds.Many2many('library.book')
+    books  = fields.Many2many('library.book')
