@@ -10,3 +10,5 @@ class Task(models.Model):
     worker_id = fields.Many2one('res.partner')
     start_time = fields.Datetime()
     end_time = fields.Datetime()
+    
+    area = fields.Char(related='task_type_id.area', store=True)
