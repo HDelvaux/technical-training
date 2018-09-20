@@ -11,3 +11,12 @@ class Books(models.Model):
     isbn = fields.Char(string='ISBN')
     publisher_id = fields.Many2one('library.publisher', string='Publisher')
     rental_ids = fields.One2many('library.rental', 'book_id', string='Rentals')
+
+class Bookcopies(models.Model):
+    _name =  'library.bookcopy'
+    _inherits = {
+        'library.book' : 'book_id',
+        }
+
+    book_id = fields.Many2one('library.book')
+    reference = fields.Char()
