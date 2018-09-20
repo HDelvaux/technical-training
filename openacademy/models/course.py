@@ -26,7 +26,7 @@ class Session(models.Model):
     active = fields.Boolean(default=True)
     duration = fields.Float(digits=(6, 2), help="Duration in days")
     seats = fields.Integer(string="Number of seats")
-    instructor_id = fields.Many2one('res.partner', string="Instructor")
+    instructor_id = fields.Many2one('res.partner', string="Instructor", domain=[('instructor', '=', True)])
     course_id = fields.Many2one('openacademy.course', ondelete='cascade', string="Course", required=True)
     attendee_ids = fields.Many2many('res.partner', string="Attendees", domain=[('is_company', '=', False)])
     taken_seats = fields.Float(string="Taken seats", compute='_taken_seats')
@@ -59,3 +59,9 @@ class Session(models.Model):
             }}
         delta = fields.Date.from_string(self.end_date) - fields.Date.from_string(self.start_date)
         self.duration = delta.days + 1
+
+class instructor(models.Model):
+    _inherit = 'res.partner'
+
+    instructor = fields.Boolean()
+    session_ids = fields.One2many('openacademy.session','instructor_id', readonly=True)

@@ -46,6 +46,7 @@
                         <field name="phone" widget="phone"/>
                         <field name="mobile" widget="phone"/>
                     </group>
+                    <!-- <field name="session_ids" /> -->
                 </form>
             </field>
         </record>
