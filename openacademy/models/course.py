@@ -44,9 +44,11 @@ class Course(models.Model):
 
 class Session(models.Model):
     _name = 'openacademy.session'
+    _description = 'Course Session'
+    _inherit = ['mail.thread']
     _order = 'name'
 
-    name = fields.Char(required=True)
+    name = fields.Char(required=True, track_visibility=True)
     start_date = fields.Date(default=lambda self : fields.Date.today())
     #end_date = fields.Date(default=lambda self : fields.Date.today())
     end_date = fields.Date(string='End date', store=True, compute='_get_end_date', inverse='_set_end_date')
@@ -61,9 +63,9 @@ class Session(models.Model):
     responsible_id = fields.Many2one(related='course_id.responsible_id', readonly=True, store=True)
 
     percentage_per_day = fields.Integer("%", default=100)
-    attendees_count = fields.Integer(string="Attendees count", compute='_get_attendees_count', store=True)
+    attendees_count = fields.Integer(string="Attendees count", compute='_get_attendees_count', store=True, track_visibility=True)
 
-    is_confirmed = fields.Boolean(compute='_check_is_confirmed')
+    is_confirmed = fields.Boolean(compute='_check_is_confirmed', track_visibility=True)
 
     def _warning(self, title, message):
         return {'warning': {
