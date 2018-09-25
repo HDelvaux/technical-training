@@ -23,6 +23,10 @@ class TaskType(models.Model):
     area = fields.Char()
     active = fields.Boolean(default=True)
 
+    @api.multi
+    def name_get(self):
+        return [(item.name, item.description) for item in self]
+
 
 class DayNumber(models.Model):
     _name = 'coopplanning.daynumber'
