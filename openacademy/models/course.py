@@ -168,7 +168,7 @@ class Session(models.Model):
 
     @api.multi
     def newinvoice(self):
-        invoice_for_instructor = self.invoice_ids.filtered(lambda r: r.state in ['draft'])[:1]
+        invoice_for_instructor = self.invoice_ids
 
         if not invoice_for_instructor:
             inv = self.env['account.invoice'].create({
