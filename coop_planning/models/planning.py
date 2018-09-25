@@ -25,7 +25,7 @@ class TaskType(models.Model):
 
     @api.multi
     def name_get(self):
-        return [(item.name, item.description) for item in self]
+        return [(item.id, '%s-%s' % (item.name, item.description) )for item in self]
 
 
 class DayNumber(models.Model):
