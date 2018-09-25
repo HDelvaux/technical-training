@@ -36,6 +36,9 @@
             <button name="done" type="workflow"
                 string="Mark as done" attrs="{'invisible' : [('state', 'in', ('draft', 'done'))] }"
                 class="oe_highlight"  groups="openacademy.group_manager"/>
+            <button name="newinvoice" type="object"
+                string="Create invoice"
+                class="oe_highlight"  groups="openacademy.group_manager"/>
 
               <field name="state" widget="statusbar"/>
           </header>

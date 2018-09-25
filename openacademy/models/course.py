@@ -74,6 +74,8 @@ class Session(models.Model):
 
     sequence = fields.Integer('sequence')
 
+    invoice_ids = fields.Many2many('account.invoice', string="Invoices")   
+
     state = fields.Selection([
                     ('draft', "Draft"),
                     ('confirmed', "Confirmed"),
@@ -163,3 +165,34 @@ class Session(models.Model):
         rec = super(Session, self).create(vals)
         rec._auto_transition()
         return rec
+
+    @api.multi
+    def newinvoice(self):
+        invoice_for_instructor = self.invoice_ids.search([('partner_id', '=', self.instructor_id.id)])
+
+        if not invoice_for_instructor:
+            inv = self.env['account.invoice'].create({
+                'partner_id': self.instructor_id.id,
+                'invoice_line_ids': [
+                    (0, 0, {
+                        'name' : self.course_id.name,
+                        'price_unit' : 100,
+                        'account_id' : 3,
+                        })],
+                'reference_type': 'none',
+                'account_id' : 3,
+                })
+            self.invoice_ids |= inv
+        else:
+            invoice_for_instructor = invoice_for_instructor[0]
+
+            invoice_for_instructor.write({
+                'invoice_line_ids': [
+                    (0, 0, {
+                        'name' : self.course_id.name,
+                        'price_unit' : 200,
+                        'account_id' : 3,
+                    }),
+                ]
+            })
+        self.is_paid = True
