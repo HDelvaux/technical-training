@@ -63,6 +63,8 @@ class Session(models.Model):
     percentage_per_day = fields.Integer("%", default=100)
     attendees_count = fields.Integer(string="Attendees count", compute='_get_attendees_count', store=True)
 
+    is_confirmed = fields.Boolean(compute='_check_is_confirmed')
+
     def _warning(self, title, message):
         return {'warning': {
             'title': title,
@@ -76,6 +78,12 @@ class Session(models.Model):
                 session.taken_seats = 0.0
             else:
                 session.taken_seats = 100.0 * len(session.attendee_ids) / session.seats
+
+    @api.depends('taken_seats')
+    def _check_is_confirmed(self):
+        for session in self:
+            if session.taken_seats >= 50.0:
+                session.is_confirmed = True
 
     @api.depends('attendee_ids')
     def _get_attendees_count(self):
