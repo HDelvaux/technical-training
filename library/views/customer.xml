@@ -23,6 +23,7 @@
                               <field name="zip" placeholder="ZIP" class="o_address_zip" />
                               <field name="country_id" placeholder="Country" class="o_address_country" />
                           </div>
+                          <field name="owing" />
                       </group>
                       <notebook>
                           <page string="Rentals" name="rentals" >
@@ -31,12 +32,25 @@
                                       <field name="book_id"/>
                                       <field name="rental_date"/>
                                       <field name="return_date"/>
+                                      <field name="rental_cost"/>
+                                      <field name="rental_fine"/>
                                   </tree>
                               </field>
                           </page>
                       </notebook>
                   </sheet>
                 </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="customer_view_search">
+            <field name="name">Customer List</field>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+                <search string="Search Customer">
+                    <field name="name"/>
+                    <field name="owing"/>
+                </search>
             </field>
         </record>
 

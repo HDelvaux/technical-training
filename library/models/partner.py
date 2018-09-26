@@ -20,3 +20,13 @@ class Partner(models.Model):
         'Nationality',
     )
     birthdate =  fields.Date('Birthdate',)
+
+    owing = fields.Integer(compute='_compute_owing', string='Owing', store=True)
+
+    @api.depends('rental_ids.rental_cost', 'rental_ids.rental_fine')
+    def _compute_owing(self):
+        for partner in self:
+            owing = 0
+            for rental in partner.rental_ids:
+                owing += rental.rental_cost + rental.rental_fine
+            partner.owing = owing

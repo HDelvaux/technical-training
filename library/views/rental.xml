@@ -7,12 +7,18 @@
             <field name="model">library.rental</field>
             <field name="arch" type="xml">
                 <form>
+                    <header>
+                        <button name="remind" type="object" string="Remind" class="oe_highlight"/>
+                    </header>
                     <sheet>
                         <group>
                             <field name="customer_id" context="{'default_customer': True}"/>
                             <field name="book_id" context="{'default_book': True}"/>
                             <field name="rental_date"/>
                             <field name="return_date"/>
+                            <field name="actual_date"/>
+                            <field name="rental_cost"/>
+                            <field name="rental_fine"/>
                         </group>
                     </sheet>
                 </form>

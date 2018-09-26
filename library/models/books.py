@@ -21,3 +21,5 @@ class Books(models.Model):
         'book_id',
         string='Rentals',)
     book = fields.Boolean('is a book', default=False)
+    rental_cost = fields.Float('Rental cost', default=0.00)
+    late_fine = fields.Float('Fine per day', default=0.00)

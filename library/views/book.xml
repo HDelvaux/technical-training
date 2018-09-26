@@ -19,6 +19,8 @@
                             <field name="edition_date"/>
                             <field name="isbn"/>
                             <field name="publisher_id"/>
+                            <field name="rental_cost"/>
+                            <field name="late_fine"/>
                         </group>
                         <notebook>
                             <page string="Rentals" name="rentals" >
